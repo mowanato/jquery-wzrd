@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>JQuery wzrd demo page</title>
+    <link href="default.css" rel="stylesheet" type="text/css" />
+    <script src="jquery.min.js"></script>
+    <script src="../src/jquery.wzrd.js"></script>
+    <script>
+      $(function() {
+        $('#wzrd').wzrd({
+          defaultAllPageClickable: false,
+          initialIndex: 0,
+          onPageChanging: function(oldIndex, newIndex) {
+            var diff = newIndex - oldIndex;
+            if (diff == 1 || diff == -1) {
+              return true;
+            } else {
+              alert("refused!");
+              return false;
+            }
+          },
+          onFinished: function() {
+            alert("finish!");
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>JQuery wzrd demo page</h1>
+
+    <div id="wzrd">
+
+      <div wzrd-tabs>
+        <span wzrd-target-panel="#panel_a">page 1</span>
+        <span wzrd-target-panel="#panel_b">page 2</span>
+        <span wzrd-target-panel="#panel_c">page 3</span>
+      </div>
+      
+      <div id="panel_a" class="panel">
+        <span>PAGE 1</span>
+      </div>
+      <div id="panel_b" class="panel">
+        <span>PAGE 2</span>
+      </div>
+      <div id="panel_c" class="panel">
+        <span>PAGE 3</span>
+      </div>
+      
+      <div>
+        <span class="prev-button" wzrd-prev-button>prev</span>
+        <span class="next-button" wzrd-next-button>next</span>
+        <span class="finish-button" wzrd-finish-button>finish</span>
+      <div>
+    </div>
+  </body>
+</html>

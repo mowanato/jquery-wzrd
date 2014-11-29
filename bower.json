@@ -1,0 +1,29 @@
+{
+  "name": "jquery-wzrd",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mowanato/jquery-wzrd",
+  "authors": [
+    "Naritomo Moriwaki"
+  ],
+  "description": "A simple JQuery wizard plugin",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "wizard"
+  ],
+  "license": "MIT",
+  "main": [
+    "src/jquery.wzrd.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.11.1"
+  }
+}
