@@ -1,5 +1,5 @@
 /*!
- * jQuery Wzrd Plugin v1.0.0
+ * jQuery Wzrd Plugin
  * https://github.com/mowanato/jquery-wzrd
  *
  * Copyright 2014 Naritomo Moriwaki
@@ -7,6 +7,17 @@
  */
 (function ($) {
     var
+    attrs = {
+        tabs: 'data-wzrd-tabs',
+        prevButton: 'data-wzrd-prev-button',
+        nextButton: 'data-wzrd-next-button',
+        finishButton: 'data-wzrd-finish-button',
+        targetPanel: 'data-wzrd-target-panel'
+    },
+    classNames = {
+        active: 'wzrd-active',
+        clickable: 'wzrd-clickable'
+    },
     init = function(opts) {
         var
         self = this,
@@ -21,10 +32,10 @@
             defaultAllPageClickable: false
         }, opts),
         
-        $tabs = self.find('[wzrd-tabs]').children(),
-        $prevButton = self.find('[wzrd-prev-button]'),
-        $nextButton = self.find('[wzrd-next-button]'),
-        $finishButton = self.find('[wzrd-finish-button]'),
+        $tabs = self.find('[' + attrs.tabs + ']').children(),
+        $prevButton = self.find('[' + attrs.prevButton + ']'),
+        $nextButton = self.find('[' + attrs.nextButton + ']'),
+        $finishButton = self.find('[' + attrs.finishButton + ']'),
 
         activate = function(newIndex) {
             var
@@ -37,18 +48,18 @@
             if (currentIndex >= 0) {
                 if (currentIndex == newIndex) return;
                 var currentPage = pages[currentIndex];
-                $(currentPage.tab).removeClass('wzrd-active');
-                $(currentPage.panel).removeClass('wzrd-active');
+                $(currentPage.tab).removeClass(classNames.active);
+                $(currentPage.panel).removeClass(classNames.active);
             }
             var newPage = pages[newIndex];
             newPage.clickable = true;
-            $(newPage.tab).addClass('wzrd-clickable wzrd-active');
-            $(newPage.panel).addClass('wzrd-active');
+            $(newPage.tab).addClass(classNames.clickable + ' ' + classNames.active);
+            $(newPage.panel).addClass(classNames.active);
             activePageIndex = newIndex;
 
-            $prevButton[newIndex == 0 ? 'removeClass' : 'addClass']('wzrd-clickable');
-            $nextButton[newIndex == pages.length-1 ? 'removeClass' : 'addClass']('wzrd-clickable');
-            $finishButton[newIndex != pages.length-1 ? 'removeClass' : 'addClass']('wzrd-clickable');
+            $prevButton[newIndex == 0 ? 'removeClass' : 'addClass'](classNames.clickable);
+            $nextButton[newIndex == pages.length-1 ? 'removeClass' : 'addClass'](classNames.clickable);
+            $finishButton[newIndex != pages.length-1 ? 'removeClass' : 'addClass'](classNames.clickable);
             
             if (settings.onPageChanged) {
                 settings.onPageChanged(currentIndex, newIndex);
@@ -58,7 +69,7 @@
         $tabs.each(function (index, elem){
             var
             $tab = $(elem),
-            $panel = $($tab.attr('wzrd-target-panel')),
+            $panel = $($tab.attr(attrs.targetPanel)),
             page = {
                 index: index,
                 tab: $tab.get(0),
@@ -66,7 +77,7 @@
                 clickable: settings.defaultAllPageClickable || index < settings.initialIndex
             }
             if (page.clickable) {
-                $tab.addClass('wzrd-clickable');
+                $tab.addClass(classNames.clickable);
             }
             $tab.on('click', function() {
                 if (!page.clickable) return;
@@ -75,19 +86,19 @@
             pages.push(page);
         });
         $prevButton.on('click', function() {
-            if ($prevButton.hasClass('wzrd-clickable')) {
+            if ($prevButton.hasClass(classNames.clickable)) {
                 activate(activePageIndex - 1);
             }
             return false;
         });
         $nextButton.on('click', function() {
-            if ($nextButton.hasClass('wzrd-clickable')) {
+            if ($nextButton.hasClass(classNames.clickable)) {
                 activate(activePageIndex + 1);
             }
             return false;
         });
         $finishButton.on('click', function() {
-            if ($finishButton.hasClass('wzrd-clickable')) {
+            if ($finishButton.hasClass(classNames.clickable)) {
                 if (settings.onFinished) settings.onFinished();
             }
             return false;
