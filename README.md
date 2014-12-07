@@ -4,7 +4,7 @@ jquery-wzrd
 A simple JQuery wizard plugin  
 
 ##Usage
-Look at [demo](https://github.com/mowanato/jquery-wzrd/tree/master/demo).
+See [demo page](https://mowanato.github.io/jquery-wzrd/).
 
 ##License
 
