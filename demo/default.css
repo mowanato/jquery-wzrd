@@ -1,0 +1,41 @@
+#panel_a > span {
+    font-size:4em;
+    color:red;
+}
+#panel_b > span {
+    font-size:4em;
+    color:blue;
+}
+#panel_c > span {
+    font-size:4em;
+    color:green;
+}
+
+div.panel {
+    display:none;
+}
+
+div.wzrd-active {
+    display: block;
+}
+
+span.wzrd-clickable {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
+span.wzrd-active {
+    cursor: auto;
+    text-decoration: none;
+    color: red;
+}
+
+span.next-button, span.finish-button{
+    display: none;
+}
+
+span.next-button.wzrd-clickable, span.finish-button.wzrd-clickable {
+    display: inline;
+}
+
